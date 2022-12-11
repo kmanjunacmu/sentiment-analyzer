@@ -1,3 +1,6 @@
+"""
+The main driver class for the application.
+"""
 import news
 import sentiment_analysis
 import news_archive

@@ -1,4 +1,10 @@
 """
+Performs Sentiment Analysis using the VADER library:
+
+Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for
+Sentiment Analysis of Social Media Text. Eighth International Conference on
+Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
+
 Nltk downloader required to download the SentimentIntensityAnalyzer.
 """
 # import nltk.downloader
@@ -33,6 +39,8 @@ def sentiment_analysis():
     for i in range(len(response_string['articles'])):
         headline = response_string['articles'][i]['description']
         print(f"{[i+1]} : {headline}")
+
+        # Get the polarity score of each headline using the VADER model
         polarity_score = sia().polarity_scores(text=headline)
         polarity_score['headline'] = headline
         analysis.append(polarity_score)
