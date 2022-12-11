@@ -37,32 +37,38 @@ def search_archives_from_keyword(a):
 
     print("\nChoose the language of archive")
     for i in lang_dict.keys():
-        print(i, lang_dict[i])
+        print(f"{i}. {lang_dict[i]}")
 
     choice = int(input("\nEnter a number: "))
-    l = lang_dict[choice]
+    lang = lang_dict[choice]
 
     source = a.groupby('Language')['Source'].apply(list).reset_index(name='Source_List')
 
-    i = source[source['Language'] == l].index.values[0]
+    i = source[source['Language'] == lang].index.values[0]
     lang_source = list(set(source._get_value(i, 'Source_List')))
     i = 1
 
     print("\nChoose a source: ")
     for s in lang_source:
-        print(i, s)
+        print(f"{i}. {s}")
         i = i + 1
 
     src_choice = int(input("\nEnter a choice for source: "))
     src = lang_source[src_choice - 1]
 
-    a_new = a.loc[a['Language'] == l]
+    a_new = a.loc[a['Language'] == lang]
     a_new = a_new.loc[a_new['Source'] == src]
 
     keyword = str(input("\nEnter a keyword: "))
-    translated = GoogleTranslator(source='auto', target=l.lower()).translate(keyword)
+    translated = GoogleTranslator(source='auto', target=lang.lower()).translate(keyword)
     final = a_new[a_new['Text'].str.lower().str.contains(translated.lower())]
     final = final.drop(['Language', 'Source', 'Date'], axis=1)
     col_list = final.Text.values.tolist()
-    for l in col_list:
-        print(l + "\n\n")
+
+    i = 1
+    print()
+
+    for lang in col_list:
+        print(f"{i}. {lang}")
+        i += 1
+
