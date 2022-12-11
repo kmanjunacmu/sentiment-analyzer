@@ -11,7 +11,7 @@ if __name__ == '__main__':
     """
     Displays the main menu to the user.
     """
-    csv_df = pd.read_csv("old-newspaper.csv")
+    csv_df = pd.read_csv("sentiment-analyzer/old-newspaper.csv")
 
     while True:
         print("\n**********MENU**********")
